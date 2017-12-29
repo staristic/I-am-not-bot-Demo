@@ -1,0 +1,17 @@
+{
+  "name": "I-am-not-bot-Demo",
+  "version": "0.0.0",
+  "description": "I-am-not-bot-Demo",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.13.4",
+    "http": "^0.0.0",
+    "https": "^1.0.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "author": "staristic",
+  "license": "ISC"
+}

@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>reCAPTCHA demo: Explicit render after an onload callback</title>
+    <script type="text/javascript">
+      var serverVerify = function(token){
+        var xhr = new XMLHttpRequest();
+        var url = "/bot";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.parse(xhr.responseText);
+                console.log('json', json);
+                document.getElementById("verify").innerText = 'server verify: ' + json.success;
+            }
+        };
+        var data = JSON.stringify({"token": token});
+        xhr.send(data);
+      }
+      var verifyCallback = function(response) {
+        console.log(response);
+        serverVerify(response)
+      };
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6LfZoz4UAAAAAPTse1gwGUC_h6Vi3LJ3rPd3VUrK',
+           'callback': verifyCallback
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <form action="?" method="POST">
+      <div id="html_element"></div>
+      <br>
+    </form>
+    <p id="verify"></p>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
+  </body>
+</html>
